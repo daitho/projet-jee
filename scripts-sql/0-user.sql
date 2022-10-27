@@ -11,7 +11,7 @@ DROP SCHEMA IF EXISTS projet CASCADE;
 DO $code$
 BEGIN
 	IF EXISTS (SELECT  FROM pg_catalog.pg_roles WHERE rolname  = 'projet')
-	THEN
+	THEN  
 		REVOKE CREATE ON DATABASE postgres FROM projet;
 		DROP USER projet;
 	END IF;
