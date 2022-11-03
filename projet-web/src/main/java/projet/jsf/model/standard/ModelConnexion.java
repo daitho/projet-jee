@@ -63,7 +63,7 @@ public class ModelConnexion {
 	        
 	        modelInfo.setMontant(dto.getCredit());
 	    	modelInfo.setTitre( dto.getNom()+" "+dto.getPrenom() );
-	    	modelInfo.setTexte("Ici, la satisfaction est notre priorité");
+	    	modelInfo.setTexte("Ici, la satisfaction est notre priorité.");
 		    return "info";
 
 	    } else {
