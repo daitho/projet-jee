@@ -16,6 +16,26 @@
    <from-outcome>info</from-outcome>
    <to-view-id>/pages/info.xhtml</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>produit</from-outcome>
+   <to-view-id>/pages/admin/produit/liste.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>produitU</from-outcome>
+   <to-view-id>/pages/usager/produit/liste.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>enchere</from-outcome>
+   <to-view-id>/pages/usager/enchere/liste.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>mouvement</from-outcome>
+   <to-view-id>/pages/admin/mouvement/liste.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>mouvementU</from-outcome>
+   <to-view-id>/pages/usager/mouvement/liste.xhtml</to-view-id>
+  </navigation-case>
  </navigation-rule>
  <application/>
 </faces-config>

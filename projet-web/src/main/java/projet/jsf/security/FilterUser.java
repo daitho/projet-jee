@@ -19,7 +19,7 @@ import projet.jsf.util.UtilJsf;
 				DispatcherType.REQUEST, 
 				DispatcherType.FORWARD
 		}
-					, urlPatterns = { "/pages/user/*" })
+					, urlPatterns = { "/pages/usager/*" })
 public class FilterUser implements Filter {
 
 	

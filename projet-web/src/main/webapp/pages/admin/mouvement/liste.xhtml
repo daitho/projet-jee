@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/page-standard.xhtml">
+
+	<ui:define name="titre">Liste des mouvements</ui:define>
+	<ui:define name="contenu">
+		<h:form>
+			<h4>Liste des Mouvements en cours</h4>
+			<h:dataTable styleClass="liste" value="#{modelMouvement.listeNon}"
+				var="item" rowClasses="impair, pair"
+				columnClasses="left,left,center">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id" />
+					</f:facet>
+                          #{item.idmouvement}
+               </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Montant" />
+					</f:facet>
+				         #{item.montant}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="nom" />
+					</f:facet>
+				         #{item.compte.nom} #{item.compte.prenom}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Motif du mouvement" />
+					</f:facet>
+				         #{item.libelle}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Accepter" />
+					</f:facet>
+					<h:commandButton action="#{modelMouvement.validerMouvement(item)}"
+						value="Valider"
+						onclick="return confirm('Confirmez-vous la validation du mouvement ?')"
+						image="#{ resource['images:valider.png'] }" title="Valider"
+						styleClass="image-action">
+						<f:ajax render="@form" execute="@form" />
+					</h:commandButton>
+					
+					<h:commandButton action="#{modelMouvement.supprimer(item)}"
+						value="Supprimer"
+						onclick="return confirm('Confirmez-vous le refus du mouvement ?')"
+						image="#{ resource['images:stop.png'] }" title="Valider"
+						styleClass="image-action">
+						<f:ajax render="@form" execute="@form" />
+					</h:commandButton>
+				</h:column>
+				
+			</h:dataTable>
+			<br />
+			<h4>Liste des Mouvements déja éfectuer</h4>
+			<h:dataTable styleClass="liste" value="#{modelMouvement.listeOui}"
+				var="item" rowClasses="impair, pair"
+				columnClasses="left,left,center">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Numéro" />
+					</f:facet>
+                          #{item.idmouvement}
+               </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Montant" />
+					</f:facet>
+				         #{item.montant}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="nom" />
+					</f:facet>
+				         #{item.compte.nom} #{item.compte.prenom}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Motif du mouvement" />
+					</f:facet>
+				         #{item.libelle}
+			   </h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

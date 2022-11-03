@@ -50,7 +50,7 @@ public class UtilJsf {
 
 		if ( exception != null ) {
 			if (message == null ) {
-				message = "Ecec du traitement demandé.";
+				message = "Echec du traitement demandé.";
 			}
 		}
 

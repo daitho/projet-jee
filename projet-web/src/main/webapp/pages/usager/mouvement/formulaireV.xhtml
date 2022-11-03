@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition template="/template/page-standard.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	 <f:metadata>
+		<f:viewParam name="idmouvement"
+			value="#{modelMouvement.courant.idmouvement}" />
+		<f:viewAction action="#{modelMouvement.actualiserCourant()}" />
+	</f:metadata>
+	<ui:define name="titre">Montant: <h:dataTable
+			styleClass="liste" value="#{modelProduit.listeUsager.get(0)}"
+			var="item" rowClasses="impair, pair" columnClasses="left,left,center">
+			<h:column>
+				         #{item.compte.credit}€<br />
+			</h:column>
+		</h:dataTable>Dépôt</ui:define>
+	<ui:define name="contenu">
+		<h:form>
+
+			<table class="form">
+				<tr>
+					<td><h:outputLabel for="compte">Numéro compte :</h:outputLabel></td>
+					<td><h:inputText id="compte" size="5" readonly="true"
+							value="#{modelProduit.compte.id}" /> <br /> <h:message
+							for="compte" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel>Nom :</h:outputLabel></td>
+					<td><h:inputText for="compte1"  size="5" readonly="true"
+							value="#{modelMouvement.listeNon.get(0).compte.nom} #{modelMouvement.listeNon.get(0).compte.prenom}" />
+						<br /> <h:message for="compte1"  errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="idmouvement">Id :</h:outputLabel></td>
+					<td><h:inputText id="idmouvement" size="5" readonly="true"
+							value="#{modelMouvement.courant.idmouvement}" /> <br />
+						<h:message for="idmouvement" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="libelle">Motif:</h:outputLabel></td>
+					<td><h:inputText id="libelle" size="25" readonly="true"
+							value="#{modelMouvement.courant.libelle}" /> <br /> <h:message
+							for="libelle" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="montant">Montant du virement:</h:outputLabel></td>
+					<td><h:inputText id="montant" size="25"
+							value="#{modelMouvement.courant.montant}"
+							validator="#{modelMouvement.validatePrix}" /> <br /> <h:message
+							for="montant" errorClass="error" /></td>
+				</tr>
+			</table>
+			<br />
+			<h:commandButton value="Valider"
+				action="#{modelMouvement.validerMiseAJour()}" />
+			<h:button value="Retour" outcome="mouvementU" />
+		</h:form>
+	</ui:define>
+</ui:composition>

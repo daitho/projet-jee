@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition template="/template/page-standard.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">>
+
+	 <f:metadata>
+		<f:viewParam name="idproduit"
+			value="#{modelProduit.courant.idproduit}" />
+		<f:viewAction action="#{modelProduit.actualiserCourant()}" />
+	</f:metadata>
+	<ui:define name="titre">Montant: <h:dataTable
+			styleClass="liste" value="#{modelProduit.listeUsager.get(0)}"
+			var="item" rowClasses="impair, pair" columnClasses="left,left,center">
+			<h:column>
+				         #{item.compte.credit}€<br />
+			</h:column>
+		</h:dataTable>Produit</ui:define>
+	<ui:define name="contenu">
+		<h:form>
+
+			<table class="form">
+				<tr>
+					<td><h:outputLabel for="idproduit">IdProduit :</h:outputLabel></td>
+					<td><h:inputText id="idproduit" size="5" readonly="true"
+							value="#{modelProduit.compte.id}" /> <br /> <h:message
+							for="idproduit" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="compte">IdCompte :</h:outputLabel></td>
+					<td><h:inputText id="compte" size="5" readonly="true"
+							value="#{modelProduit.compte.id}" /> <br /> <h:message
+							for="compte" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="photo">Photo :</h:outputLabel></td>
+					<td><h:outputText id="photo" size="5" readonly="true"
+							value="#{resource['images:supprimer.png']}" /> <br /> <h:message
+							for="photo" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="nomproduit">Nom produit :</h:outputLabel></td>
+					<td><h:inputText id="nomproduit" size="25"
+							value="#{modelProduit.courant.nomproduit}" /> <br /> <h:message
+							for="nomproduit" errorClass="error" /></td>
+				</tr>
+
+				<tr>
+					<td><h:outputLabel for="description">Description :</h:outputLabel></td>
+					<td><h:inputText id="description" size="25"
+							value="#{modelProduit.courant.description}" /> <br /> <h:message
+							for="description" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="prix">Prix :</h:outputLabel></td>
+					<td><h:inputText id="prix" size="25"
+							value="#{modelProduit.courant.prix}" /> <br /> <h:message
+							for="prix" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="datedebutenchere">Date debut enchere :</h:outputLabel></td>
+					<td><h:inputText id="datedebutenchere" size="25"
+							value="#{modelProduit.courant.datedebutenchere}">
+							<f:convertDateTime pattern="yyyy-mm-dd HH:mm:ss" />
+						</h:inputText> <br /> <h:message for="datedebutenchere" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="datefinenchere">Date fin enchere :</h:outputLabel></td>
+					<td><h:inputText id="datefinenchere" size="25"
+							value="#{modelProduit.courant.datefinenchere}">
+							<f:convertDateTime pattern="yyyy-mm-dd HH:mm:ss" />
+						</h:inputText> <br /> <h:message for="datefinenchere" errorClass="error" /></td>
+				</tr>
+			</table>
+
+			<br />
+			<h:commandButton value="Valider"
+				action="#{modelProduit.validerMiseAJour()}" />
+			<h:button value="Retour" outcome="produitU" />
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

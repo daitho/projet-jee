@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition template="/template/page-standard.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<f:metadata>
+		<f:viewParam name="idproduit"
+			value="#{modelProduit.courant.idproduit}" />
+		<f:viewAction action="#{modelProduit.actualiserCourant()}" />
+	</f:metadata>
+	<ui:define name="titre">Montant: <h:dataTable
+			styleClass="liste" value="#{modelProduit.listeUsager.get(0)}" var="item"
+			rowClasses="impair, pair" columnClasses="left,left,center">
+			<h:column>
+				         #{item.compte.credit}€<br />
+			</h:column>
+		</h:dataTable>Enchère</ui:define>
+	<ui:define name="contenu">
+		<h:form>
+			<table class="form">
+				<tr>
+				<td><h:outputLabel for="nomproduit">Numéro du produit:  </h:outputLabel></td>
+					<td><h:outputText title="produit: " id="produit"
+							value="#{modelProduit.courant.idproduit}" /> <br /> <h:message
+							for="produit" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="nomproduit">nom du gagnant actuel:  </h:outputLabel>
+						<h:outputText id="compte" value="#{modelProduit.courantProduit.compte.nom}  #{modelProduit.courantProduit.compte.prenom} " />
+						<h:outputText value="#{modelProduit.compte.nom}" /> <br /> <h:message
+							for="id" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="nomproduit">Nom produit :</h:outputLabel>
+						<h:outputText title="Nom du Produit: "
+							value="#{modelProduit.courant.nomproduit}" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="description">Description :</h:outputLabel>
+						<h:outputText value="#{modelProduit.courant.description}" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="nomproduit">Prix minimal :</h:outputLabel>
+						<h:outputText value="#{modelProduit.courant.prix}" /> €</td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="nomproduit">Prix de la dernière enchère :</h:outputLabel>
+						<h:outputText value="#{modelProduit.courantProduit.prixenchere}" />€</td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="nomproduit">Date debut enchere :</h:outputLabel>
+						<h:outputText value="#{modelProduit.courant.datedebutenchere}" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="nomproduit">Date fin enchere :</h:outputLabel>
+						<h:outputText title="Date fin enchere : "
+							value="#{modelProduit.courant.datefinenchere}" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="prixenchere">Votre prix :</h:outputLabel></td>
+					<td><h:inputText id="prixenchere" size="25"
+					        value = "#{modelProduit.courantEnchere.prixenchere}"
+							validator="#{modelProduit.validatePrix}" > 
+							</h:inputText>€<br /> <h:message
+							for="prixenchere" errorClass="error" /></td>
+				</tr>
+			</table>
+
+			<br />
+			<h:commandButton value="Valider"
+				action="#{modelProduit.validerMiseAJourEnchere}" />
+			<h:button value="Retour" outcome="enchere" />
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

@@ -23,7 +23,6 @@ public class DaoCompte implements IDaoCompte {
 
 	
 	// Champs
-	
 	@PersistenceContext
 	private EntityManager	em;
 	
@@ -79,12 +78,10 @@ public class DaoCompte implements IDaoCompte {
 
 
 	@Override
-	@TransactionAttribute( NOT_SUPPORTED )
-	public boolean verifierUnicitePseudo( String pseudo, int idCompte )  {
-	    var jpql = "SELECT COUNT(c) FROM Compte c WHERE c.pseudo=:pseudo AND c.id <> :idCompte ";
+	public boolean verifierUnicitePseudo( String pseudo)  {
+	    var jpql = "SELECT COUNT(c) FROM Compte c WHERE c.pseudo=:pseudo";
 	    var query = em.createQuery( jpql, Long.class );
 	    query.setParameter( "pseudo", pseudo );
-	    query.setParameter( "idCompte", idCompte );
         return query.getSingleResult() == 0;
 	}
 	

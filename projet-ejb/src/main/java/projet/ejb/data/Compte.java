@@ -1,126 +1,114 @@
 package projet.ejb.data;
 
-import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.GenerationType.IDENTITY;
+import java.io.Serializable;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
+/**
+ * The persistent class for the compte database table.
+ * 
+ */
 @Entity
 @Table( name = "compte" )
-public class Compte  {
-
-	
-	// Champs
+@NamedQuery(name="Compte.findAll", query="SELECT c FROM Compte c")
+public class Compte implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue( strategy = IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column( name = "idcompte")
-	private int			id;
-	
-	@Column( name = "pseudo")
-	private String		pseudo;
-	
-	@Column( name = "motdepasse")
-	private String		motDePasse;
-	
-	@Column( name = "email")
-	private String		email;
-	
-	@ElementCollection( fetch = EAGER )
-	@CollectionTable( name = "role", joinColumns = @JoinColumn( name = "idcompte" ) )
-	@Column( name = "role")
-	private List<String> roles = new ArrayList<>();	
-	
-	
-	// Constructeurs
-	
+	private Integer id;
+
+	private double credit;
+
+	private String email;
+
+	private String motDePasse;
+
+	private String nom;
+
+	private String prenom;
+
+	private String pseudo;
+
+	private String roles;
+
+
+
 	public Compte() {
 	}
 
-	public Compte(int id, String pseudo, String motDePasse, String email) {
-		this.id = id;
-		this.pseudo = pseudo;
-		this.motDePasse = motDePasse;
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer idcompte) {
+		this.id = idcompte;
+	}
+
+	public double getCredit() {
+		return this.credit;
+	}
+
+	public void setCredit(double credit) {
+		this.credit = credit;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-		
-	// Getters & setters
-	
-	public int getId() {
-		return id;
+
+	public String getMotDePasse() {
+		return this.motDePasse;
 	}
-	
-	public void setId(int id) {
-		this.id = id;
+
+	public void setMotDePasse(String motdepasse) {
+		this.motDePasse = motdepasse;
+	}
+
+	public String getNom() {
+		return this.nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return this.prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
 
 	public String getPseudo() {
-		return pseudo;
+		return this.pseudo;
 	}
 
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
 
-	public String getMotDePasse() {
-		return motDePasse;
+	public String getRoles() {
+		return this.roles;
 	}
 
-	public void setMotDePasse(String motDePasse) {
-		this.motDePasse = motDePasse;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
-	
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public List<String> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<String> roles) {
+	public void setRoles(String roles) {
 		this.roles = roles;
 	}
 
-    
-	// equals() et hashcode()
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Compte other = (Compte) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
-	
 }

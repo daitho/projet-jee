@@ -32,7 +32,7 @@ public class ServiceCompte implements IServiceCompte {
 	@Override
 	public int inserer(DtoCompte dtoCompte) throws ExceptionValidation {
 		verifierValiditeDonnees(dtoCompte);
-		int id = daoCompte.inserer(mapper.map(dtoCompte));
+		Integer id = daoCompte.inserer(mapper.map(dtoCompte));
 		return id;
 	}
 
@@ -75,7 +75,7 @@ public class ServiceCompte implements IServiceCompte {
 			message.append("\nLe pseudo est trop court.");
 		} else if (dtoCompte.getPseudo().length() > 25) {
 			message.append("\nLe pseudo est trop long.");
-		} else if (!daoCompte.verifierUnicitePseudo(dtoCompte.getPseudo(), dtoCompte.getId())) {
+		} else if (!daoCompte.verifierUnicitePseudo(dtoCompte.getPseudo())) {
 			message.append("\nLe pseudo " + dtoCompte.getPseudo() + " est déjà utilisé.");
 		}
 

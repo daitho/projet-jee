@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/page-standard.xhtml">
+
+	<ui:define name="titre">Montant: <h:dataTable
+			styleClass="liste" value="#{modelProduit.listeUsager.get(0)}" var="item"
+			rowClasses="impair, pair" columnClasses="left,left,center">
+			<h:column>
+				         #{item.compte.credit}€<br />
+			</h:column>
+		</h:dataTable>Liste des enchères</ui:define>
+
+	<ui:define name="contenu">
+		<h:form>
+			<h4>Liste des produits en enchère</h4>
+			<h:dataTable styleClass="liste"
+				value="#{modelProduit.listerProduitEnEnchere()}" var="item"
+				rowClasses="impair, pair" columnClasses="left,left,center">
+				<h:column id="idproduit">
+					<f:facet name="header">
+						<h:outputText value="id" />
+					</f:facet>
+				         #{item.idproduit}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="nom" />
+					</f:facet>
+				         #{item.nomproduit}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="photo" />
+					</f:facet>
+				       #{item.photo}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="description" />
+					</f:facet>
+				        #{item.description}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Prix" />
+					</f:facet>
+					<h:outputText value="#{item.prix}">
+						<f:convertNumber pattern="#,##0.00 €" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="date début" />
+					</f:facet>
+				       #{item.datedebutenchere}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="date fin" />
+					</f:facet>
+				       #{item.datefinenchere}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Enchère sur ce produit" />
+					</f:facet>
+					<h:button outcome="formulaire?idproduit=#{item.idproduit}"
+						image="#{ resource['images:modifier.png'] }" title="Enchere"
+						styleClass="image-action" />
+				</h:column>
+			</h:dataTable>
+			<br />
+			<h4>Liste des produits en cours d'enchère</h4>
+			<h:dataTable styleClass="liste"
+				value="#{modelProduit.listerProduitEncourDenchere()}" var="item"
+				rowClasses="impair, pair" columnClasses="left,left,center">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="nom" />
+					</f:facet>
+				         #{item.nomproduit}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="photo" />
+					</f:facet>
+				       #{item.photo}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="description" />
+					</f:facet>
+				        #{item.description}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="prix" />
+					</f:facet>
+				       #{item.prix}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="date début" />
+					</f:facet>
+				       #{item.datedebutenchere}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="date fin" />
+					</f:facet>
+				       #{item.datefinenchere}
+			    </h:column>
+			</h:dataTable>
+			<br />
+			<h4>Votre liste d'enchère passée</h4>
+			<h:dataTable styleClass="liste" value="#{modelEnchere.liste}"
+				var="item" rowClasses="impair, pair"
+				columnClasses="left,left,center">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="id" />
+					</f:facet>
+				         #{item.idenchere}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="nom" />
+					</f:facet>
+				       #{item.produit.nomproduit}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="description" />
+					</f:facet>
+				        #{item.produit.description}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="prix enchère" />
+					</f:facet>
+				       #{item.prixenchere}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="date début" />
+					</f:facet>
+				       #{item.dateenchere}
+			    </h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

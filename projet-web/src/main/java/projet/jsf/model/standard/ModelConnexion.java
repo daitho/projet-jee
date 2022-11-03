@@ -19,9 +19,13 @@ public class ModelConnexion {
 	// Champs
 
 	private Compte			courant;
+	
+	private  static Compte courantCompte;
+	
+	private static DtoCompte dtocompte;
 
 	@Inject
-	private CompteActif		compteActif;
+	private  CompteActif		compteActif;
 	@Inject
 	private ModelInfo		modelInfo;
 	@EJB
@@ -43,7 +47,8 @@ public class ModelConnexion {
 	public String connect() {
 	    
 	    DtoCompte dto = serviceConnexion.sessionUtilisateurOuvrir( courant.getPseudo(), courant.getMotDePasse() );
-	    
+	    setCourantCompte(courant);
+	    setDtocompte(dto);
 	    if ( dto != null ){
 	    	
 //		    try {
@@ -56,13 +61,34 @@ public class ModelConnexion {
 	        compteActif.setPseudo( dto.getPseudo() );
 	        compteActif.setRoles( dto.getRoles() );
 	        
-	    	modelInfo.setTitre( "Bienvenue" );
-	    	modelInfo.setTexte( "Vous êtes connecté en tant que '" + courant.getPseudo() +"'.");
+	        modelInfo.setMontant(dto.getCredit());
+	    	modelInfo.setTitre( dto.getNom()+" "+dto.getPrenom() );
+	    	modelInfo.setTexte("Ici, la satisfaction est notre priorité");
 		    return "info";
 
 	    } else {
 	        UtilJsf.messageError( "Pseudo ou mot de passe invalide." );
 	    	return null;
 	    }
+	}
+
+
+	public static DtoCompte getDtocompte() {
+		return dtocompte;
+	}
+
+
+	public static void setDtocompte(DtoCompte dtocompte) {
+		ModelConnexion.dtocompte = dtocompte;
+	}
+
+
+	public Compte getCourantCompte() {
+		return courantCompte;
+	}
+
+
+	public void setCourantCompte(Compte courantStat) {
+		ModelConnexion.courantCompte = courantStat;
 	}	
 }

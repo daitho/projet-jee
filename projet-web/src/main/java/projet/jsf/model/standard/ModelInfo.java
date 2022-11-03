@@ -13,10 +13,20 @@ public class ModelInfo {
 	private String 		titre;
 	
 	private String		texte;
+	
+	private double montant;
 
 	
 	// Getters & Setters
 	
+	public double getMontant() {
+		return montant;
+	}
+
+	public void setMontant(double montant) {
+		this.montant = montant;
+	}
+
 	public String getTitre() {
 		return titre;
 	}

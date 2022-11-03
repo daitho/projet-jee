@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/page-standard.xhtml">
+
+	<ui:define name="titre">Montant: <h:dataTable
+			styleClass="liste" value="#{modelProduit.listeUsager.get(0)}" var="item"
+			rowClasses="impair, pair" columnClasses="left,left,center">
+			<h:column>
+				         #{item.compte.credit}€<br />
+			</h:column>
+		</h:dataTable>Mouvements</ui:define>
+	<ui:define name="contenu">
+		<h:form>
+			<h:button value="Virement" outcome="formulaireV" />
+			<h:button value="Dépôt" outcome="formulaireD" />
+			<br />
+			<h4>Mouvements en cours</h4>
+			<h:dataTable styleClass="liste"
+				value="#{modelMouvement.listeUserNon}" var="item1"
+				rowClasses="impair, pair" columnClasses="left,left,center">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id" />
+					</f:facet>
+                          #{item1.idmouvement}
+               </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Montant" />
+					</f:facet>
+				         #{item1.montant}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nom" />
+					</f:facet>
+				         #{item1.compte.nom} #{item1.compte.prenom}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Motif du mouvement" />
+					</f:facet>
+				         #{item1.libelle}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Annuler" />
+					</f:facet>
+					<h:commandButton action="#{modelMouvement.supprimer(item1)}"
+						value="Supprimer"
+						onclick="return confirm('Confirmez-vous l'annulation du mouvement ?')"
+						image="#{ resource['images:stop.png'] }" title="Annuler"
+						styleClass="image-action">
+						<f:ajax render="@form" execute="@form" />
+					</h:commandButton>
+				</h:column>
+			</h:dataTable>
+			<br />
+			<h4>Liste des Mouvements déja Valider</h4>
+			<h:dataTable styleClass="liste"
+				value="#{modelMouvement.listeUserOui}" var="item"
+				rowClasses="impair, pair" columnClasses="left,left,center">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Numéro" />
+					</f:facet>
+                          #{item.idmouvement}
+               </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Montant" />
+					</f:facet>
+				         #{item.montant}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nom" />
+					</f:facet>
+				         #{item.compte.nom} #{item.compte.prenom}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Motif du mouvement" />
+					</f:facet>
+				         #{item.libelle}
+			   </h:column>
+			   
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Annuler" />
+					</f:facet>
+					<h:commandButton action="#{modelMouvement.supprimer(item)}"
+						value="Supprimer"
+						onclick="return confirm('Confirmez-vous l'annulation du mouvement ?')"
+						image="#{ resource['images:supprimer.png'] }" title="Annuler"
+						styleClass="image-action">
+						<f:ajax render="@form" execute="@form" />
+					</h:commandButton>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,22 +1,27 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <ui:composition template="/template/page-standard.xhtml"
-     xmlns="http://www.w3.org/1999/xhtml"
-     xmlns:h="http://java.sun.com/jsf/html"
-     xmlns:f="http://java.sun.com/jsf/core"
-     xmlns:ui="http://java.sun.com/jsf/facelets">>
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <f:metadata>
-	<f:viewAction action="#{utilJsf.messageFromRequestAttribute()}" />
-</f:metadata>
+		<f:viewAction action="#{utilJsf.messageFromRequestAttribute()}" />
+	</f:metadata>
 
-     <ui:define name="titre">#{modelInfo.titre}</ui:define>
+	<ui:define name="titre" ><h:panelGroup rendered="#{compteActif.utilisateur}">
+	    Solde: <span style="border-color: black;">#{modelInfo.montant}€<br /></span>
+		</h:panelGroup>
+	#{modelInfo.titre}</ui:define>
 
-    <ui:define name="contenu">
+	<ui:define name="contenu">
 
-	<br />
-	<div>#{modelInfo.texte}</div>
-	<br />
-	<br />
+		<br />
+		<span></span>
+		<div><h:graphicImage value="#{resource['images:bienvenu.png']}" height="300" width="600"/></div>
+		<div><H4>#{modelInfo.texte}</H4></div>
+		<br />
+		<br />
 
 	</ui:define>
 

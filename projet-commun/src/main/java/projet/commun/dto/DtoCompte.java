@@ -1,17 +1,17 @@
 package projet.commun.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @SuppressWarnings("serial")
 public class DtoCompte implements Serializable  {
-
 	
 	// Champs
+	private Integer		id;
 	
-	private int			id;
+	private String     nom;
+	
+	private String     prenom;
 	
 	private String		pseudo;
 	
@@ -19,7 +19,9 @@ public class DtoCompte implements Serializable  {
 	
 	private String		email;
 	
-	private List<String> roles = new ArrayList<>();
+	private double		credit;
+	
+	private String roles;
 	
 	
 	// Constructeurs
@@ -27,22 +29,54 @@ public class DtoCompte implements Serializable  {
 	public DtoCompte() {
 	}
 
-	public DtoCompte(int id, String pseudo, String motDePasse, String email ) {
+	public DtoCompte(int id, String nom, String prenom, String pseudo, String motDePasse, String email, double credit,
+			String roles) {
 		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
 		this.pseudo = pseudo;
 		this.motDePasse = motDePasse;
 		this.email = email;
+		this.credit = credit;
+		this.roles = roles;
 	}
-	
-	
+
+
+
+
 	// Getters & setters
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
+	}
+
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public double getCredit() {
+		return credit;
+	}
+
+	public void setCredit(double credit) {
+		this.credit = credit;
 	}
 
 	public String getPseudo() {
@@ -69,11 +103,11 @@ public class DtoCompte implements Serializable  {
 		this.email = email;
 	}
 
-	public List<String> getRoles() {
+	public String getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<String> roles) {
+	public void setRoles(String roles) {
 		this.roles = roles;
 	}
 
@@ -81,10 +115,8 @@ public class DtoCompte implements Serializable  {
 	public boolean isInRole( String role ) {
 		
 		if ( role != null ) {
-			for ( String r : roles ) {
-				if ( r.equals(role) ) {
-					return true;
-				}
+			if ( roles.equals(role) ) {
+				return true;
 			}
 		}
 		return false;

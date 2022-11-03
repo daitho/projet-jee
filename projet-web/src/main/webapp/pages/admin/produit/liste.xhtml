@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/page-standard.xhtml">
+
+	<ui:define name="titre">Liste des produit</ui:define>
+
+	<ui:define name="contenu">
+		<h:form>
+			<h4>Liste des produits en enchere</h4>
+			<h:dataTable styleClass="liste"
+				value="#{modelProduit.listerProduitEnEnchere()}" var="item"
+				rowClasses="impair, pair" columnClasses="left,left,center">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id" />
+					</f:facet>
+                          #{item.idproduit}
+               </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="nom" />
+					</f:facet>
+				         #{item.nomproduit}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="photo" />
+					</f:facet>
+				       #{item.photo}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="description" />
+					</f:facet>
+				        #{item.description}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="prix" />
+					</f:facet>
+				       #{item.prix}
+			    </h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Flag" />
+					</f:facet>
+					<h:commandButton action="#{modelProduit.validerFlag(item)}"
+						value="Valider le flag"
+						onclick="return confirm('Confirmez-vous l'arrêt de vente du produit ?')"
+						image="#{ resource['images:voir.png'] }" title="Flag"
+						styleClass="image-action">
+						<f:ajax render="@form" execute="@form" />
+					</h:commandButton>
+				</h:column>
+			</h:dataTable>
+			
+			<h4>Liste des produits en cours d'enchere</h4>
+			<h:dataTable styleClass="liste"
+				value="#{modelProduit.listerProduitEncourDenchere()}" var="item1"
+				rowClasses="impair, pair" columnClasses="left,left,center">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id" />
+					</f:facet>
+                          #{item1.idproduit}
+               </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="nom" />
+					</f:facet>
+				         #{item1.nomproduit}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="photo" />
+					</f:facet>
+				       #{item1.photo}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="description" />
+					</f:facet>
+				        #{item1.description}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="prix" />
+					</f:facet>
+				       #{item1.prix}
+			    </h:column>
+			</h:dataTable>
+			
+			<h4>Liste de tous les produits</h4>
+			<h:dataTable styleClass="liste"
+				value="#{modelProduit.liste}" var="item"
+				rowClasses="impair, pair" columnClasses="left,left,center">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id" />
+					</f:facet>
+                          #{item.idproduit}
+               </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="nom" />
+					</f:facet>
+				         #{item.nomproduit}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="photo" />
+					</f:facet>
+				       #{item.photo}
+			   </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="description" />
+					</f:facet>
+				        #{item.description}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="prix" />
+					</f:facet>
+				       #{item.prix}
+			    </h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -26,7 +26,6 @@ public class ModelCompte implements Serializable {
 	// Champs
 	
 	private List<Compte>	liste;
-	
 	private Compte			courant;
 	
 	@EJB
@@ -57,7 +56,6 @@ public class ModelCompte implements Serializable {
 	
 	
 	// Initialisaitons
-	
 	public String actualiserCourant() {
 		if ( courant != null ) {
 			DtoCompte dto = serviceCompte.retrouver( courant.getId() ); 
@@ -69,11 +67,9 @@ public class ModelCompte implements Serializable {
 			}
 		}
 		return null;
-	}
-	
+	}	
 	
 	// Actions
-	
 	public String validerMiseAJour() {
 		try {
 			if ( courant.getId() == null) {
@@ -87,6 +83,16 @@ public class ModelCompte implements Serializable {
 			UtilJsf.messageError(e);
 			return null;
 		}
+	}
+	
+	public String inserer( Compte item ) {
+		try {
+			serviceCompte.modifier( mapper.map(item) );
+			UtilJsf.messageInfo( "Mise à jour effectuée avec succès." );
+		} catch (ExceptionValidation e) {
+			UtilJsf.messageError( e ); 
+		}
+		return null;
 	}
 	
 	public String supprimer( Compte item ) {

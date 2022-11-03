@@ -19,6 +19,6 @@ public interface IDaoCompte {
 
 	Compte 		validerAuthentification( String pseudo, String motDePasse );
 
-	boolean 	verifierUnicitePseudo( String pseudo, int idCompte );
+	boolean 	verifierUnicitePseudo( String pseudo);
 
 }
